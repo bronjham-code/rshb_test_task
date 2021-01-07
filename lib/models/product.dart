@@ -27,13 +27,12 @@ class Product extends ChangeNotifier {
       this.shortDescription,
       this.description,
       this.price,
-      bool favorite,
       this.characteristicsList});
 
-  static Future<Product> fromMap(Map<String, dynamic> map) async {
+  static Product fromMap(Map<String, dynamic> map) {
     List<ProductCharacteristic> characteristics;
     if (map['characteristics'] != null) {
-      await Future.forEach((map['characteristics'] as List), (characteristic) {
+      (map['characteristics'] as List).forEach((characteristic) {
         if (characteristics == null) {
           characteristics = List<ProductCharacteristic>();
         }

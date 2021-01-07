@@ -34,7 +34,7 @@ class CatalogProvider with ChangeNotifier {
       {List<int> filterByCategory, bool sortByPrice = false}) async {
     if (filterByCategory != null && filterByCategory.isNotEmpty) {
       List<Product> productsList;
-      await Future.forEach(_products, (product) {
+      _products.forEach((product) {
         if (filterByCategory.contains(product.categoryId)) {
           if (productsList == null) productsList = List<Product>();
           productsList.add(product);
@@ -55,13 +55,13 @@ class CatalogProvider with ChangeNotifier {
     return products;
   }
 
-  void setFavorite(int productId) {
+  Future<void> setFavorite(int productId) async {
     if (_favorites.contains(productId.toString())) {
       _favorites.remove(productId.toString());
     } else {
       _favorites.add(productId.toString());
     }
-    prefs.setStringList('rshb_favorites', _favorites);
+    await prefs.setStringList('rshb_favorites', _favorites);
     notifyListeners();
   }
 
@@ -84,16 +84,16 @@ class CatalogProvider with ChangeNotifier {
 
     if (mapData != null && mapData.isNotEmpty) {
       if (mapData.containsKey(_categoriesKey)) {
-        await Future.forEach(mapData[_categoriesKey],
+        mapData[_categoriesKey].forEach(
             (category) => _categories.add(ProductCategory.fromMap(category)));
       }
       if (mapData.containsKey(_farmersKey)) {
-        await Future.forEach(mapData[_farmersKey],
-            (farmer) => _farmers.add(ProductFarmer.fromMap(farmer)));
+        mapData[_farmersKey]
+            .forEach((farmer) => _farmers.add(ProductFarmer.fromMap(farmer)));
       }
       if (mapData.containsKey(_productsKey)) {
-        await Future.forEach(mapData[_productsKey],
-            (product) async => _products.add(await Product.fromMap(product)));
+        mapData[_productsKey].forEach(
+            (product) async => _products.add(Product.fromMap(product)));
       }
     }
     _isLoaded = true;

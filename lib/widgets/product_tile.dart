@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rshb_test_task/models/product.dart';
 import 'package:rshb_test_task/providers/catalog.dart';
+import 'package:rshb_test_task/utils.dart';
 import 'package:rshb_test_task/widgets/favorite_button.dart';
 
 class ProductTile extends StatelessWidget {
@@ -109,23 +110,7 @@ class ProductTile extends StatelessWidget {
                           Container(
                               padding: EdgeInsets.all(5),
                               child: Text(
-                                //Replace 31 to var
-                                (product.ratingCount > 0)
-                                    ? product.ratingCount.toString() +
-                                        ([
-                                          0,
-                                          5,
-                                          6,
-                                          7,
-                                          8,
-                                          9
-                                        ].contains(product.ratingCount % 10)
-                                            ? ' оценок'
-                                            : [2, 3, 4].contains(
-                                                    product.ratingCount % 10)
-                                                ? ' оценки'
-                                                : ' оценка')
-                                    : 'Нет оценок',
+                                Utils.ratingCountToString(product.ratingCount),
                                 style: TextStyle(
                                     color: const Color(0xFF969696),
                                     fontSize: 12),

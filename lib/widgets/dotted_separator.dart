@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 class DottedSeparator extends StatelessWidget {
   final double height;
+  final double width;
   final Color color;
 
-  const DottedSeparator({this.height = 1, this.color = Colors.black});
+  const DottedSeparator(
+      {this.width = 1.0, this.height = 1.0, this.color = Colors.black});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final boxWidth = constraints.constrainWidth();
-        final dashWidth = 1.0;
+        final dashWidth = width;
         final dashHeight = height;
         final dashCount = (boxWidth / (2 * dashWidth)).floor();
         return Flex(

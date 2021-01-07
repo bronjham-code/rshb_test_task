@@ -72,25 +72,7 @@ class _HomePageState extends State<HomePage>
                                                   color: Colors.green),
                                               tabs: List<Tab>.generate(
                                                   tabs.length,
-                                                  (int i) => Tab(
-                                                          child: Container(
-                                                        height: 50,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(50),
-                                                        ),
-                                                        child: Align(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child: Text(tabs[i],
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
-                                                        ),
-                                                      )))))))
+                                                  (int i) => _tab(tabs[i]))))))
                             ],
                         body: TabBarView(
                           controller: tabController,
@@ -106,4 +88,16 @@ class _HomePageState extends State<HomePage>
                           ],
                         )))));
   }
+
+  Tab _tab(String title) => Tab(
+          child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+      ));
 }

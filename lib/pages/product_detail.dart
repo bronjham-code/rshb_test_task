@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rshb_test_task/models/product.dart';
 import 'package:rshb_test_task/providers/catalog.dart';
+import 'package:rshb_test_task/utils.dart';
 import 'package:rshb_test_task/widgets/characteristic_list.dart';
 import 'package:rshb_test_task/widgets/favorite_button.dart';
 
@@ -143,16 +144,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 Container(
                                     padding: EdgeInsets.all(5),
                                     child: Text(
-                                      //Replace 31 to var
-                                      (31 > 0)
-                                          ? 31.toString() +
-                                              ([0, 5, 6, 7, 8, 9]
-                                                      .contains(31 % 10)
-                                                  ? ' оценок'
-                                                  : [2, 3, 4].contains(31 % 10)
-                                                      ? ' оценки'
-                                                      : ' оценка')
-                                          : 'Нет оценок',
+                                      Utils.ratingCountToString(
+                                          widget.product.ratingCount),
                                       style: TextStyle(
                                           color: const Color(0xFF969696),
                                           fontSize: 12),

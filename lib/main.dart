@@ -15,10 +15,6 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        routes: <String, WidgetBuilder>{
-          'init': (BuildContext context) => InitializationPage(),
-          //'productDetail': (BuildContext context) => ProductDetailPage(),
-        },
         home: Provider.of<CatalogProvider>(context, listen: false).isLoaded
             ? HomePage()
             : FutureBuilder(

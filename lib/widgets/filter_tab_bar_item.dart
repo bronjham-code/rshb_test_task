@@ -33,6 +33,17 @@ class _FilterTabBarItemState extends State<FilterTabBarItem> {
     super.initState();
   }
 
+  void _changeButtonState() {
+    setState(() {
+      if (_state) {
+        _state = false;
+      } else {
+        _state = true;
+      }
+    });
+    if (widget.onPressed != null) widget.onPressed(_state);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,16 +68,7 @@ class _FilterTabBarItemState extends State<FilterTabBarItem> {
                           ? widget.selectedColor
                           : widget.unSelectedIconColor,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        if (_state) {
-                          _state = false;
-                        } else {
-                          _state = true;
-                        }
-                      });
-                      if (widget.onPressed != null) widget.onPressed(_state);
-                    })),
+                    onPressed: _changeButtonState)),
             Text(
               widget.title,
               textAlign: TextAlign.center,
