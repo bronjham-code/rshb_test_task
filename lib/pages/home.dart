@@ -10,8 +10,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   List<String> tabs;
   TabController tabController;
 
@@ -39,54 +38,48 @@ class _HomePageState extends State<HomePage>
         body: ScrollConfiguration(
             behavior: CustomScrollBehavior(),
             child: OrientationBuilder(
-                builder: (BuildContext context, Orientation orientation) =>
-                    NestedScrollView(
-                        floatHeaderSlivers: true,
-                        headerSliverBuilder: (BuildContext context,
-                                bool isScrolled) =>
-                            [
-                              //TabBar for category
-                              SliverToBoxAdapter(
+                builder: (BuildContext context, Orientation orientation) => NestedScrollView(
+                    floatHeaderSlivers: true,
+                    headerSliverBuilder: (BuildContext context, bool isScrolled) => [
+                          //TabBar for category
+                          SliverToBoxAdapter(
+                              child: Container(
+                                  color: Colors.white,
                                   child: Container(
-                                      color: Colors.white,
-                                      child: Container(
-                                          height: 50,
-                                          padding: const EdgeInsets.all(5),
-                                          margin: const EdgeInsets.all(16),
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey[100],
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          child: TabBar(
-                                              controller: tabController,
-                                              indicatorPadding: EdgeInsets.zero,
-                                              labelPadding: EdgeInsets.zero,
-                                              labelColor: Colors.white,
-                                              unselectedLabelColor:
-                                                  Colors.black,
-                                              indicatorSize:
-                                                  TabBarIndicatorSize.label,
-                                              indicator: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
-                                                  color: Colors.green),
-                                              tabs: List<Tab>.generate(
-                                                  tabs.length,
-                                                  (int i) => _tab(tabs[i]))))))
-                            ],
-                        body: TabBarView(
-                          controller: tabController,
-                          //Disable scrollable view
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: [
-                            //Content of product category
-                            ProductsPage(orientation: orientation),
-                            //Content of farmers category
-                            FarmersPage(),
-                            //Content of agrotours category
-                            AgriToursPage(),
-                          ],
-                        )))));
+                                      height: 50,
+                                      padding: const EdgeInsets.all(5),
+                                      margin: const EdgeInsets.all(16),
+                                      decoration: BoxDecoration(color: Colors.grey[100], borderRadius: BorderRadius.circular(50)),
+                                      child: TabBar(
+                                          controller: tabController,
+                                          indicatorPadding: EdgeInsets.zero,
+                                          labelPadding: EdgeInsets.zero,
+                                          labelColor: Colors.white,
+                                          unselectedLabelColor: Colors.black,
+                                          indicatorSize: TabBarIndicatorSize.label,
+                                          indicator: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Colors.green, boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.green,
+                                              offset: Offset.zero,
+                                              blurRadius: 2,
+                                              spreadRadius: 0,
+                                            )
+                                          ]),
+                                          tabs: List<Tab>.generate(tabs.length, (int i) => _tab(tabs[i]))))))
+                        ],
+                    body: TabBarView(
+                      controller: tabController,
+                      //Disable scrollable view
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        //Content of product category
+                        ProductsPage(orientation: orientation),
+                        //Content of farmers category
+                        FarmersPage(),
+                        //Content of agrotours category
+                        AgriToursPage(),
+                      ],
+                    )))));
   }
 
   Tab _tab(String title) => Tab(
